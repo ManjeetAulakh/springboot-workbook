@@ -55,3 +55,7 @@ Thumbs.db
 *.war
 *.db
 *.swp
+
+# Ignore Maven Wrapper scripts inside subfolders
+**/mvnw
+**/mvnw.cmd

@@ -1,0 +1,57 @@
+# ========================
+# Maven / Gradle
+# ========================
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+/build/
+.gradle/
+.mvn/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# ========================
+# Logs
+# ========================
+*.log
+
+# ========================
+# IDEs
+# ========================
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.project
+.classpath
+.settings/
+.sts4-cache/
+.springBeans
+
+# ========================
+# OS-specific
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Java Class Files
+# ========================
+*.class
+
+# ========================
+# Environment / Secrets
+# ========================
+.env
+*.env
+
+# ========================
+# Others (Optional)
+# ========================
+*.jar
+*.war
+*.db
+*.swp

@@ -1,6 +1,9 @@
-package com.summerpep.first;
+package com.summerpep.first.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.summerpep.first.models.Product;
+import com.summerpep.first.services.ProductService;
 
 import java.util.List;
 

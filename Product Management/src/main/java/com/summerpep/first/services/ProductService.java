@@ -1,8 +1,11 @@
-package com.summerpep.first;
+package com.summerpep.first.services;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.summerpep.first.models.Product;
+import com.summerpep.first.repository.ProductRepo;
 
 @Service
 public class ProductService {

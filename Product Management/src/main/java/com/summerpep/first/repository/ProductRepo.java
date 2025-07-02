@@ -1,10 +1,12 @@
-package com.summerpep.first;
+package com.summerpep.first.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
+
+import com.summerpep.first.models.Product;
 
 @Repository
 public class ProductRepo {

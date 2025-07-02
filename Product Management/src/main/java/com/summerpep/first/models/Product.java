@@ -1,4 +1,4 @@
-package com.summerpep.first;
+package com.summerpep.first.models;
 
 public class Product {
     private int id;

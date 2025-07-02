@@ -1,6 +1,7 @@
+## For Creating new Product
 POST : http://localhost:8082/products
 Content-Type: application/json
 
 {
-    "name":"Manjeet"
+    "name":"Phone"
 }

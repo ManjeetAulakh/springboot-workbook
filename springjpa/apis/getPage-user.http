@@ -1,0 +1,6 @@
+#  Get page 0 with 10 users, sorted by 'name' in ascending order
+GET http://localhost:8082/users/page?page=0&size=10&sortBy=name&sortDir=asc
+
+# Get page 0 with 10 users, sorted by 'name' in descending order
+GET http://localhost:8082/users/page?page=0&size=10&sortBy=name&sortDir=desc
+

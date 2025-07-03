@@ -1,0 +1,86 @@
+POST http://localhost:8082/users/bulk
+Content-Type: application/json
+
+[{
+  "name": "Karyn",
+  "email": "kspoward0@virginia.edu"
+}, {
+  "name": "Quinlan",
+  "email": "qaujean1@cocolog-nifty.com"
+}, {
+  "name": "Harv",
+  "email": "hrigolle2@fema.gov"
+}, {
+  "name": "Joline",
+  "email": "jantoney3@yahoo.com"
+}, {
+  "name": "Pammy",
+  "email": "praxworthy4@house.gov"
+}, {
+  "name": "Darren",
+  "email": "dsteiner5@symantec.com"
+}, {
+  "name": "Garland",
+  "email": "gwaith6@wisc.edu"
+}, {
+  "name": "Ermanno",
+  "email": "echipchase7@macromedia.com"
+}, {
+  "name": "Josi",
+  "email": "jsumbler8@people.com.cn"
+}, {
+  "name": "Inigo",
+  "email": "imossman9@scientificamerican.com"
+}, {
+  "name": "Danica",
+  "email": "dtorricellaa@fda.gov"
+}, {
+  "name": "Kareem",
+  "email": "kdiddamsb@sohu.com"
+}, {
+  "name": "Rhiamon",
+  "email": "rzanettinic@odnoklassniki.ru"
+}, {
+  "name": "Seana",
+  "email": "sgirtond@freewebs.com"
+}, {
+  "name": "Teriann",
+  "email": "tmcgerre@webnode.com"
+}, {
+  "name": "Eran",
+  "email": "etilfordf@google.co.uk"
+}, {
+  "name": "Carola",
+  "email": "cbestwickg@arizona.edu"
+}, {
+  "name": "Neal",
+  "email": "njurischh@admin.ch"
+}, {
+  "name": "Adella",
+  "email": "awalthoi@xinhuanet.com"
+}, {
+  "name": "Alric",
+  "email": "astiellj@quantcast.com"
+}, {
+  "name": "Egan",
+  "email": "eortak@webs.com"
+}, {
+  "name": "Derron",
+  "email": "dvassarl@google.it"
+}, {
+  "name": "Bertina",
+  "email": "bgibbiesonm@liveinternet.ru"
+}, {
+  "name": "Bridie",
+  "email": "bbalthasarn@yale.edu"
+}, {
+  "name": "Carmelita",
+  "email": "ckobelto@jigsy.com"
+}, {
+  "name": "Maurie",
+  "email": "mapplinp@bravesites.com"
+}, {
+  "name": "Ginni",
+  "email": "ggauchq@photobucket.com"
+}
+]

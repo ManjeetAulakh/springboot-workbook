@@ -1,5 +1,11 @@
 package com.pep.springjpa.models;
 
+import java.time.LocalDate;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,13 +24,22 @@ import lombok.Setter;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank(message = "Name is required")
     private String name;
 
     @NotBlank(message = "Email is required")
-    @Email(message = "Emial should be valid")
+    @Email(message = "Email should be valid")
     private String email;
+    
+    // Auto-fill current date when the record is first created
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDate createdAt;
+
+    // Auto-update date whenever the record is updated
+    @UpdateTimestamp
+    private LocalDate updatedAt;
 }

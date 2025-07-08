@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pep.springjpa.exception.UserNotFoundException;
@@ -20,16 +21,33 @@ import jakarta.validation.Valid;
 @Service
 public class UserService {
     private final UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            user.getRoles().add("ROLE_USER");
+        }
+
         return userRepo.save(user);
     }
 
     public List<User> createUsers(List<User> users) {
+
+        users.forEach(user -> {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+            if (user.getRoles() == null || user.getRoles().isEmpty()) {
+                user.getRoles().add("ROLE_USER");
+            }
+        });
+
         // using StreamSupport
         Iterable<User> savedUsers = userRepo.saveAll(users);
         return StreamSupport.stream(savedUsers.spliterator(), false)
@@ -56,9 +74,7 @@ public class UserService {
 
     public Page<User> getUserPage(int page, int size, String sortBy, String sortDir) {
 
-        Sort sort = sortDir.equalsIgnoreCase("asc") ?
-                Sort.by(sortBy).ascending() :
-                Sort.by(sortBy).descending();
+        Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
 
         Pageable pageable = PageRequest.of(page, size, sort);
         return userRepo.findAll(pageable);
@@ -80,6 +96,10 @@ public class UserService {
 
         existingUser.setName(user.getName());
         existingUser.setEmail(user.getEmail());
+
+        if (user.getRoles() != null && !user.getRoles().isEmpty()) {
+            existingUser.setRoles(user.getRoles());
+        }
 
         return userRepo.save(existingUser);
     }

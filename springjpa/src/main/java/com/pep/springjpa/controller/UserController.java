@@ -77,4 +77,12 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUSer(@Valid @RequestBody User user) {
+        User registerdUser = userService.createUser(user);
+        registerdUser.setPassword(null);  // or use response DTO 
+        return ResponseEntity.status(HttpStatus.CREATED).body(registerdUser);
+    }
+    
+
 }

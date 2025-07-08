@@ -1,0 +1,18 @@
+POST http://localhost:8082/users/register
+Content-Type: application/json
+#Authorization: Basic BASE64(username:password)  when use basic auth and /register is secure endpoint
+
+{
+    // by deafult set role user
+    "name":"Amanpal",
+    "email":"aman@gmail.com",
+    "password":"abc123"
+}
+
+# {
+#     // by deafult set role user
+#     "name":"MANJEET",
+#     "email":"manjeet@gmail.com",
+#     "password":"abc123",
+#     "roles":["ROLE_ADMIN"]
+# }

@@ -1,0 +1,12 @@
+GET http://localhost:8082/users
+Authorization: Basic bWFuamVldEBnbWFpbC5jb206YWJjMTIz
+# base64 for manjeet@gmail.com and password abc123 -> admin    (no space must be there betwen two lines)
+
+# GET http://localhost:8082/users
+# Authorization: Basic YW1hbkBnbWFpbC5jb206YWJjMTIz
+# base64 for amnapal@gmail.com and password abc123   -> normla user cant acces /users
+
+
+
+
+

@@ -5,16 +5,17 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
-import com.pep.taskmanagement.exception.RoleNotFoundException;
-import com.pep.taskmanagement.exception.UserAlreadyExistsException;
-import com.pep.taskmanagement.exception.UserNotFoundException;
+import com.pep.taskmanagement.exception.RoleException;
+import com.pep.taskmanagement.exception.UserException;
 import com.pep.taskmanagement.models.Role;
 import com.pep.taskmanagement.models.User;
 import com.pep.taskmanagement.repository.RoleRepo;
 import com.pep.taskmanagement.repository.UserRepo;
 import com.pep.taskmanagement.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private UserRepo userRepo;
@@ -33,11 +34,11 @@ public class UserServiceImpl implements UserService {
 
         // check username or email already exists or not
         if (userRepo.existsByUsername(user.getUsername())) {
-            throw new UserAlreadyExistsException("User already exists with username: " + user.getUsername());
+            throw new UserException("User already exists with username: " + user.getUsername());
         }
 
         if (userRepo.existsByEmail(user.getEmail())) {
-            throw new UserAlreadyExistsException("User already exists with email: " + user.getEmail());
+            throw new UserException("User already exists with email: " + user.getEmail());
         }
 
         // set encoded password
@@ -47,13 +48,13 @@ public class UserServiceImpl implements UserService {
         Set<Role> roles = new HashSet<>();
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
             Role defaultRole  = roleRepo.findByName("ROLE_TEAM-MEMBER")
-                    .orElseThrow(() -> new RoleNotFoundException("Role is not exists : ROLE_TEAM-MEMBER"));
+                    .orElseThrow(() -> new RoleException("Role is not exists : ROLE_TEAM-MEMBER"));
             roles.add(defaultRole);
     
         } else {
             for(Role role : user.getRoles()) {
                 Role dbRole = roleRepo.findByName(role.getName())
-                    .orElseThrow(() -> new RoleNotFoundException("Role is not exists : "  + role.getName()));
+                    .orElseThrow(() -> new RoleException("Role is not exists : "  + role.getName()));
                 roles.add(dbRole);
             }
         }
@@ -63,9 +64,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(long userId) {
+    public User getUserById(Long userId) {
         return userRepo.findById(userId)
-            .orElseThrow(() -> new UserNotFoundException("User not found with this User ID: " + userId)
+            .orElseThrow(() -> new UserException("User not found with this User ID: " + userId)
         );
     }
 
@@ -75,35 +76,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(long userId) {
+    public void deleteUser(Long userId) {
         User user = userRepo.findById(userId)
-            .orElseThrow(() -> new UserNotFoundException("User not found with this User ID: " + userId)
+            .orElseThrow(() -> new UserException("User not found with this User ID: " + userId)
         );
         
         userRepo.delete(user);
     }
 
     @Override
-    public User updateRoles(long userId, String roleName) {
+    public User updateRoles(Long userId, String roleName) {
 
         User existingUser = userRepo.findById(userId)
-            .orElseThrow(() -> new UserNotFoundException("User not found with this User ID: " + userId)
+            .orElseThrow(() -> new UserException("User not found with this User ID: " + userId)
         );
 
         Set<Role> roles = new HashSet<>();
         
         if(roleName == "manager"){
             Role existingRole = roleRepo.findByName(roleName)
-                .orElseThrow(() -> new RoleNotFoundException("Role is not supported" + roleName));
+                .orElseThrow(() -> new RoleException("Role is not supported" + roleName));
             roles.add(existingRole);
 
         }else if(roleName == "member"){
             Role existingRole = roleRepo.findByName(roleName)
-                .orElseThrow(() -> new RoleNotFoundException("Role is not supported" + roleName));
+                .orElseThrow(() -> new RoleException("Role is not supported" + roleName));
             roles.add(existingRole);
 
         }else{
-            throw new RoleNotFoundException("Role is not supported" + roleName);
+            throw new RoleException("Role is not supported" + roleName);
         }
 
         existingUser.setRoles(roles);

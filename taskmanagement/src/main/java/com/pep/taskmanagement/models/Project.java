@@ -29,7 +29,7 @@ public class Project {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank(message = "Project name is required")
     @Size(min = 3, max = 100, message = "Project name must be between 3 and 100 characters")
@@ -44,7 +44,7 @@ public class Project {
     @Future(message = "End date must be in the future")
     private LocalDate endDate;
 
-    private long projectManagerId;
+    private Long projectManagerId;
 
     private LocalDate createdAt;
 

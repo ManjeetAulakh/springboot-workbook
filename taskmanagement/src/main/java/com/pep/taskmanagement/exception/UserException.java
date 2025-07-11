@@ -1,11 +1,11 @@
 package com.pep.taskmanagement.exception;
 
-
-public class RoleNotFoundException extends RuntimeException{
+public class UserException extends RuntimeException {
     String message;
 
-    public RoleNotFoundException(String message){
+    public UserException(String message) {
         super(message);
         this.message = message;
     }
+
 }

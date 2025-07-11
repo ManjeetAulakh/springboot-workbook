@@ -1,11 +1,9 @@
 package com.pep.taskmanagement.exception;
 
-public class UserNotFoundException extends RuntimeException {
+public class TaskException extends RuntimeException {
     String message;
-
-    public UserNotFoundException(String message) {
+    public TaskException(String message){
         super(message);
         this.message = message;
     }
-
 }

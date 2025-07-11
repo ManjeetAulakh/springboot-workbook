@@ -1,9 +1,8 @@
 package com.pep.taskmanagement.exception;
 
-public class UserAlreadyExistsException extends RuntimeException {
+public class PageException extends RuntimeException {
     String message;
-
-    public UserAlreadyExistsException(String message){
+    public PageException(String message){
         super(message);
         this.message = message;
     }

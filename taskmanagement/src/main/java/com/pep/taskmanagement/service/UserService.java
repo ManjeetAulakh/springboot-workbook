@@ -7,9 +7,9 @@ import com.pep.taskmanagement.models.User;
 public interface UserService {
     
     public User createUser(User user);
-    public User getUserById(long userId);
+    public User getUserById(Long userId);
     public List<User> getAllUsers();
-    public void deleteUser(long userId);
-    public User updateRoles(long userId, String roleName);
+    public void deleteUser(Long userId);
+    public User updateRoles(Long userId, String roleName);
     
 } 

@@ -34,7 +34,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank(message = "Title is required")
     @Size(min = 5, message = "Title must be at least 5 characters long")
@@ -55,8 +55,8 @@ public class Task {
     private LocalDateTime createdAt;
 
     //foreign keys 
-    private long projectId;
-    private long userId;
+    private Long projectId;
+    private Long userId;
 
     @PrePersist
     protected void onCreate() {

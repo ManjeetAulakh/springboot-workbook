@@ -13,9 +13,9 @@ import com.pep.taskmanagement.models.Project;
 @Repository
 public interface ProjectRepo extends JpaRepository<Project, Long> {
     
-    List<Project> findByProjectManagerId(long managerId);
+    List<Project> findByProjectManagerId(Long managerId);
 
-    Page<Project> findByProjectManagerId(long managerId, Pageable pageable);
+    Page<Project> findByProjectManagerId(Long managerId, Pageable pageable);
 
     List<Project> findByNameContainingIgnoreCase(String keyword);
 

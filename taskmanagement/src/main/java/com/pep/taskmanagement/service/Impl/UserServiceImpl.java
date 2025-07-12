@@ -11,6 +11,7 @@ import com.pep.taskmanagement.exception.RoleException;
 import com.pep.taskmanagement.exception.UserException;
 import com.pep.taskmanagement.models.Role;
 import com.pep.taskmanagement.models.User;
+import com.pep.taskmanagement.models.Enums.RoleType;
 import com.pep.taskmanagement.repository.RoleRepo;
 import com.pep.taskmanagement.repository.UserRepo;
 import com.pep.taskmanagement.service.UserService;
@@ -47,14 +48,14 @@ public class UserServiceImpl implements UserService {
         // set deafult roles
         Set<Role> roles = new HashSet<>();
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
-            Role defaultRole  = roleRepo.findByName("ROLE_TEAM-MEMBER")
-                    .orElseThrow(() -> new RoleException("Role is not exists : ROLE_TEAM-MEMBER"));
+            Role defaultRole = roleRepo.findByName(RoleType.ROLE_TEAM_MEMBER.name())
+                    .orElseThrow(() -> new RoleException("Role is not exists : ROLE_TEAM_MEMBER"));
             roles.add(defaultRole);
-    
+
         } else {
-            for(Role role : user.getRoles()) {
+            for (Role role : user.getRoles()) {
                 Role dbRole = roleRepo.findByName(role.getName())
-                    .orElseThrow(() -> new RoleException("Role is not exists : "  + role.getName()));
+                        .orElseThrow(() -> new RoleException("Role is not exists : " + role.getName()));
                 roles.add(dbRole);
             }
         }
@@ -66,50 +67,39 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long userId) {
         return userRepo.findById(userId)
-            .orElseThrow(() -> new UserException("User not found with this User ID: " + userId)
-        );
+                .orElseThrow(() -> new UserException("User not found with this User ID: " + userId));
     }
 
     @Override
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepo.findAll();
     }
 
     @Override
     public void deleteUser(Long userId) {
         User user = userRepo.findById(userId)
-            .orElseThrow(() -> new UserException("User not found with this User ID: " + userId)
-        );
-        
+                .orElseThrow(() -> new UserException("User not found with this User ID: " + userId));
+
         userRepo.delete(user);
     }
 
     @Override
-    public User updateRoles(Long userId, String roleName) {
+    public User updateRoles(Long userId, Set<String> roleNames) {
 
         User existingUser = userRepo.findById(userId)
-            .orElseThrow(() -> new UserException("User not found with this User ID: " + userId)
-        );
+                .orElseThrow(() -> new UserException("User not found with this User ID: " + userId));
 
         Set<Role> roles = new HashSet<>();
-        
-        if(roleName == "manager"){
-            Role existingRole = roleRepo.findByName(roleName)
-                .orElseThrow(() -> new RoleException("Role is not supported" + roleName));
-            roles.add(existingRole);
 
-        }else if(roleName == "member"){
-            Role existingRole = roleRepo.findByName(roleName)
-                .orElseThrow(() -> new RoleException("Role is not supported" + roleName));
-            roles.add(existingRole);
-
-        }else{
-            throw new RoleException("Role is not supported" + roleName);
+        for (String roleName : roleNames) {
+            Role role = roleRepo.findByName(roleName)
+                    .orElseThrow(() -> new RoleException("Role not found: " + roleName));
+            roles.add(role);
         }
 
         existingUser.setRoles(roles);
         return userRepo.save(existingUser);
- 
+
     }
 
 }
